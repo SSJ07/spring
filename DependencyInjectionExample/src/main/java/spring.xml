@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+   
+	<context:annotation-config/>
+	<context:component-scan base-package="org.shri.models" />
+	<bean id="homeAddress" class="org.shri.models.Address">
+		<!--  This is nothing but constructor dependency injection.
+			  1. name property not supported by constructor-arg
+			  2. It support type and index property.
+			  3. Index property set value directly with given position
+		 -->
+		
+		<constructor-arg type="String" index="0" value="Pune" />
+		<constructor-arg type="String" index="1" value="MH" />
+		<constructor-arg type="String" index="2" value="IN" />
+		<constructor-arg type="String" index="3" value="411990" />
+	</bean>
+	<bean id="companyAddress" class="org.shri.models.Address">
+		<!--  This is nothing but setter and getter dependency injection -->
+		<property name="city" value="Mumbai" />
+		<property name="state" value="MH" />
+		<property name="country" value="IN" />
+		<property name="zipCode" value="412990" />
+	</bean>
+	<bean id="employee" class="org.shri.models.Employee">
+		<property name="empId" value="1001"/>
+		<property name="empName" value="Shrikant Jagtap"/>
+		<property name="addresses">
+			<list>
+				<!--  This is called reference beans.
+				 -->
+				<ref bean="homeAddress"/>
+				
+				<!--  Inner bean -->
+				
+				<bean id="companyAddress" class="org.shri.models.Address">
+					<property name="city" value="Mumbai" />
+					<property name="state" value="MH" />
+					<property name="country" value="IN" />
+					<property name="zipCode" value="412990" />
+				</bean>
+				<ref bean="companyAddress"/> <!--  This allow duplicates. Employee addresses contains three addresses -->
+			</list>
+		</property>
+	</bean>
+</beans>
