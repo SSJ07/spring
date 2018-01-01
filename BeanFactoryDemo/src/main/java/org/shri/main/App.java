@@ -13,6 +13,13 @@ public class App
 {
     public static void main( String[] args )
     {
+    	
+    	/**
+    	 * 
+    	 * BeanFactory is not support pre-instantiation.
+    	 * It will create bean object, when we call .getBean method.
+    	 * 
+    	 */
 		BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
         Product product = (Product)beanFactory.getBean("product");
         System.out.println(product);
