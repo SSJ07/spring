@@ -1,13 +1,23 @@
 package org.shri.main;
 
+import org.shri.models.Student;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
- * Hello world!
+ * 
+ * Example of collection in spring framework
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    	Student emp = (Student) context.getBean("student");
+    	System.out.println(emp);
+    	((ConfigurableApplicationContext)context).close();
+       
     }
 }
