@@ -6,7 +6,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Hello world!
+ * 
+ * Bean inheritance in spring framework
+ * We can use parent attribute in bean tag to inherit parent bean properties in child.
+ * @author Shri
  *
  */
 public class App 

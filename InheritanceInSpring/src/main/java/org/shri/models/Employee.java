@@ -17,7 +17,7 @@ public class Employee extends Person{
 	}
 	@Override
 	public String toString() {
-		return "Employee [empId=" + empId + ", employerName=" + employerName + "]";
+		return "Employee [empId=" + empId +" firstName= "+ this.getFirstName()+ " lastName="+ this.getLastName() + ", employerName=" + employerName + "]";
 	}
 	
 	
