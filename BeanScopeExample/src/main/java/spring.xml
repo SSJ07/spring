@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+   
+	<context:annotation-config/>
+	<context:component-scan base-package="org.shri.models" />
+	<!--
+		Spring support 4 types of bean scope
+		1. singleton - default bean scope. create only one instance of bean for container.
+		2. prototype - create new object for every request(.getBean()).
+		3. request - Create new object for every new http request
+		4. session -  Create spring bean object for session
+	 -->
+	<bean id="employee" class="org.shri.models.Employee"> <!--  Default is singleton scope -->
+		<property name="empId" value="1001"/>
+		<property name="empName" value="Shrikant Jagtap"></property>
+		<property name="employerName" value="ABC Ltd."/>
+	</bean>
+	<bean id="employee1" class="org.shri.models.Employee" scope="prototype">
+		<property name="empId" value="1001"/>
+		<property name="empName" value="Shrikant Jagtap"></property>
+		<property name="employerName" value="ABC Ltd."/>
+	</bean>
+</beans>
