@@ -1,49 +1,44 @@
 package org.shri.springbootstarter.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.shri.springbootstarter.models.Topic;
+import org.shri.springbootstarter.repository.TopicRepository;
 import org.shri.springbootstarter.service.TopicService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TopicServiceImpl implements TopicService {
 
-	private List<Topic> topicList = new ArrayList<Topic>(Arrays.asList(
-			new Topic("spring", "Spring Framework", "Spring Framework Description"),
-			new Topic("hibernate", "Hibernate Framework", "Hibernate Framework Description"),
-			new Topic("java", "Core Java", "Core Java Description"),
-			new Topic("python", "Python Framework", "Python Framework Description")
-			));
+	@Autowired
+	private TopicRepository topicRepository;
+	
 	@Override
 	public List<Topic> getAllTopics() {
-		return topicList; 
+		List<Topic> topicList = new ArrayList<>();
+		topicRepository.findAll().forEach(topicList::add);
+		return topicList;
 	}
 	@Override
 	public Topic getTopic(String id) {
-		return topicList.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+		return topicRepository.findOne(id);
 	}
 	@Override
 	public Topic createTopic(Topic topic) {
-		topicList.add(topic);
+		topicRepository.save(topic);
 		return topic;
 	}
 	@Override
 	public Topic updateTopic(String id, Topic topic) {
-		for(int i=0; i<topicList.size(); i++){
-			if(topicList.get(i).getId().equals(id)){
-				topicList.add(i, topic);
-				return topic;
-			}
-		}
-		return null;
+		topicRepository.save(topic);
+		return topic;
 	}
 	@Override
 	public List<Topic> deleteTopic(String id) {
-		topicList.removeIf(t->t.getId().equals(id));
-		return topicList;
+		topicRepository.delete(id);
+		return getAllTopics();
 	}
 
 }
